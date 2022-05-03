@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Movies.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -17,12 +17,14 @@ namespace Movies.Controllers
         }
 
         [HttpGet]
+        [ActionName("Get Users")]
         public List<User> Get()
         {
             return _usersService.GetUsers();
         }
 
         [HttpPost]
+        [ActionName("Add User")]
         public User Post([FromBody] UserSession session)
         {
             return _usersService.CreateUser(session);

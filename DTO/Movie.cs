@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace DataAccess.Models
+namespace DTO
 {
     public class Movie
     {
-        [Key]
         public string Id { get; set; }
         public string Name { get; set; }
         public string Genre { get; set; }

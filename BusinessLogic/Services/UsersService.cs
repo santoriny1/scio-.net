@@ -26,34 +26,49 @@ namespace BusinessLogic.Services
 
         }
 
-        //public List<DTO.Movie> GetUserMovies()
-        //{
-
-        //}
-
-        //public List<DTO.Movie> AddUserMovie(DTO.Movie movie)
-        //{
-
-        //}
-
         public User CreateUser(UserSession user)
         {
+            List<User> users = GetUsers();
 
-            //Valida que no exista
+            int cont = 0;
+
+            foreach (User u in users)
+            {
+                if(u.Email == user.Email)
+                {
+                    cont++;
+                    break;
+                }
+                    
+            }
+
+            //Valida que no exista otro usuario con el mismo Email a trvés de un contador
+            if (cont == 0)
+            {
+
+                var domainUser = new DomainModels.User()
+                {
+                    Email = user.Email,
+                    Name = user.Name,
+                    Password = user.Password
+                };
+
+                var dbUser = _repositoryManager.Users.Add(domainUser);
+                _repositoryManager.Save();
+               
+                return dbUser.ToDTO();
+
+            } else
+            {
+                return null;
+            }
             
 
-            var domainUser = new DomainModels.User()
-            {
-                Email = user.Email,
-                Name = user.Name,
-                Password = user.Password
-            };
+        }
 
-            var dbUser = _repositoryManager.Users.Add(domainUser);
-            _repositoryManager.Save();
-
-            return dbUser.ToDTO();
-
+        public User Login(UserLogin login)
+        {
+            return null;
         }
 
     }

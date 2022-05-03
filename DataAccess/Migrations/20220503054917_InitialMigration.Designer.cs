@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(MoviesContext))]
-    [Migration("20220420155515_InitialMigration")]
+    [Migration("20220503054917_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,10 +22,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Models.Movie", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
@@ -64,11 +62,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Models.Movie", b =>
                 {
-                    b.HasOne("DataAccess.Models.User", "User")
+                    b.HasOne("DataAccess.Models.User", null)
                         .WithMany("Movies")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DataAccess.Models.User", b =>

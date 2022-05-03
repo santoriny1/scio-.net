@@ -7,6 +7,7 @@ namespace DataAccess
     {
         private MoviesContext _repositoryContext;
         private IUsersRepository usersRepository;
+        private IMoviesRepository moviesRepository;
 
         public RepositoryManager(MoviesContext repositoryContext)
         {
@@ -14,10 +15,7 @@ namespace DataAccess
         }
 
         public IUsersRepository Users => usersRepository != null ? usersRepository : new UsersRepository(_repositoryContext);
-        
-        //Hacer lo mismo para movies
-        //public IUsersRepository Users => usersRepository != null ? usersRepository : new UsersRepository(_repositoryContext);
-
+        public IMoviesRepository Movies => moviesRepository != null ? moviesRepository : new MoviesRepository(_repositoryContext);
         public void Save() => _repositoryContext.SaveChanges();
     }
 }
